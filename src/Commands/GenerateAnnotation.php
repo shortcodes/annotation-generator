@@ -41,7 +41,6 @@ class GenerateAnnotations extends Command
 
         if (!$tag) {
             $tag = $nameKebab;
-            return;
         }
 
         $rootPath = app_path() . '/Swagger/Actions/' . $name;
