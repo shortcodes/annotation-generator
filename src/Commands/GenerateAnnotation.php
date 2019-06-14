@@ -40,7 +40,7 @@ class GenerateAnnotations extends Command
         }
 
         if (!$tag) {
-            $this->info('You have to provide tag --tag=.');
+            $tag = $nameKebab;
             return;
         }
 
