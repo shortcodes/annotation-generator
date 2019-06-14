@@ -31,7 +31,7 @@ class GenerateAnnotations extends Command
         $name = $this->argument('name');
         $tag = $this->option('tag');
         $noModel = $this->option('nomodel');
-        $nameKebab = Str::kebab($name);
+        $nameKebab = Str::kebab(Str::plural($name));
 
         if (!$name) {
             $this->info('You have to provide name.');
