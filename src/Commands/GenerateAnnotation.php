@@ -102,7 +102,7 @@ EOT;
         return <<<EOT
 <?php
         
-namespace App\Swagger\Actions\$name;
+namespace App\Swagger\Actions\\$name;
 
 /**
  * @OA\Get(
