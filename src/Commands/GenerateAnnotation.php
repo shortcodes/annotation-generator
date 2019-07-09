@@ -134,7 +134,7 @@ namespace App\Swagger\Actions\\$name;
 
 /**
  * @OA\Get(
- *     path="/{$nameKebab}/{$nameCammel}",
+ *     path="/{$nameKebab}/{{$nameCammel}}",
  *     summary="Return {$name} of provided ID",
  *     tags={"{$tag}"},
  *     operationId="show-{$nameKebab}",
@@ -213,7 +213,7 @@ namespace App\Swagger\Actions\\$name;
 
 /**
  * @OA\Patch(
- *     path="/{$nameKebab}/{$nameCammel}",
+ *     path="/{$nameKebab}/{{$nameCammel}}",
  *     summary="Update {$name} of provided ID",
  *     tags={"{$tag}"},
  *     operationId="update-{$nameKebab}",
@@ -265,7 +265,7 @@ namespace App\Swagger\Actions\\$name;
 
 /**
  * @OA\Delete(
- *     path="/{$nameKebab}/{$nameCammel}",
+ *     path="/{$nameKebab}/{{$nameCammel}}",
  *     summary="Delete {$name} of provided ID",
  *     tags={"{$tag}"},
  *     operationId="delete-{$nameKebab}",
