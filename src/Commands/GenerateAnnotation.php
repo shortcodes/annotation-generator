@@ -32,7 +32,7 @@ class GenerateAnnotations extends Command
         $tag = $this->option('tag');
         $noModel = $this->option('nomodel');
         $nameKebab = Str::kebab(Str::plural($name));
-        $nameCammel = Str::camel($name);
+        $nameSnake = Str::snake($name);
 
         if (!$name) {
             $this->info('You have to provide name.');
@@ -46,19 +46,19 @@ class GenerateAnnotations extends Command
         $rootPath = app_path() . '/Swagger/Actions/' . $name;
         $client = Storage::createLocalDriver(['root' => $rootPath]);
 
-        if(!$noModel){
+        if (!$noModel) {
 
-            $rootPathModels = app_path() . '/Swagger/Models' ;
+            $rootPathModels = app_path() . '/Swagger/Models';
             $clientModels = Storage::createLocalDriver(['root' => $rootPathModels]);
 
-            $clientModels->put($name . '.php',   $this->stubModel($name));
+            $clientModels->put($name . '.php', $this->stubModel($name));
             $this->info('File ' . $name . '.php' . ' created!');
 
         }
 
         foreach ($this->filesToCreate as $file) {
             $method = 'stub' . $file;
-            $client->put($file . '.php', $this->$method($name,$nameCammel, $nameKebab, $tag));
+            $client->put($file . '.php', $this->$method($name, $nameSnake, $nameKebab, $tag));
             $this->info('File ' . $file . '.php' . ' created!');
 
         }
@@ -97,7 +97,7 @@ class $name
 EOT;
     }
 
-    private function stubIndex($name,$nameCammel, $nameKebab, $tag)
+    private function stubIndex($name, $nameSnake, $nameKebab, $tag)
     {
         return <<<EOT
 <?php
@@ -125,7 +125,7 @@ namespace App\Swagger\Actions\\$name;
 EOT;
     }
 
-    private function stubShow($name, $nameCammel, $nameKebab, $tag)
+    private function stubShow($name, $nameSnake, $nameKebab, $tag)
     {
         return <<<EOT
 <?php
@@ -134,13 +134,13 @@ namespace App\Swagger\Actions\\$name;
 
 /**
  * @OA\Get(
- *     path="/{$nameKebab}/{{$nameCammel}}",
+ *     path="/{$nameKebab}/{{$nameSnake}}",
  *     summary="Return {$name} of provided ID",
  *     tags={"{$tag}"},
  *     operationId="show-{$nameKebab}",
  *     
 *      @OA\Parameter(
- *         name="$nameCammel",
+ *         name="$nameSnake",
  *         in="path",
  *         description="{$name} id",
  *         required=true,
@@ -167,7 +167,7 @@ namespace App\Swagger\Actions\\$name;
 EOT;
     }
 
-    private function stubStore($name,$nameCammel, $nameKebab, $tag)
+    private function stubStore($name, $nameSnake, $nameKebab, $tag)
     {
         return <<<EOT
 <?php
@@ -204,7 +204,7 @@ namespace App\Swagger\Actions\\$name;
 EOT;
     }
 
-    private function stubUpdate($name,$nameCammel, $nameKebab, $tag)
+    private function stubUpdate($name, $nameSnake, $nameKebab, $tag)
     {
         return <<<EOT
 <?php
@@ -213,13 +213,13 @@ namespace App\Swagger\Actions\\$name;
 
 /**
  * @OA\Patch(
- *     path="/{$nameKebab}/{{$nameCammel}}",
+ *     path="/{$nameKebab}/{{$nameSnake}}",
  *     summary="Update {$name} of provided ID",
  *     tags={"{$tag}"},
  *     operationId="update-{$nameKebab}",
  *     
 *      @OA\Parameter(
- *         name="$nameCammel",
+ *         name="$nameSnake",
  *         in="path",
  *         description="{$name} id",
  *         required=true,
@@ -256,7 +256,7 @@ namespace App\Swagger\Actions\\$name;
 EOT;
     }
 
-    private function stubDelete($name,$nameCammel, $nameKebab, $tag)
+    private function stubDelete($name, $nameSnake, $nameKebab, $tag)
     {
         return <<<EOT
 <?php
@@ -265,13 +265,13 @@ namespace App\Swagger\Actions\\$name;
 
 /**
  * @OA\Delete(
- *     path="/{$nameKebab}/{{$nameCammel}}",
+ *     path="/{$nameKebab}/{{$nameSnake}}",
  *     summary="Delete {$name} of provided ID",
  *     tags={"{$tag}"},
  *     operationId="delete-{$nameKebab}",
  *     
 *      @OA\Parameter(
- *         name="$nameCammel",
+ *         name="$nameSnake",
  *         in="path",
  *         description="{$name} id",
  *         required=true,
